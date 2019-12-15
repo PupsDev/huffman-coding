@@ -40,7 +40,3 @@ Nous aurions pu calculer l'entropie de Shannon pour chaque fichier afin de déte
 * **Mathieu LADEUIL** (https://github.com/PupsDev)
 
 
-## License
-
-
-
