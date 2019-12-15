@@ -1,0 +1,114 @@
+\hypertarget{struct_noeud}{}\doxysection{Noeud Struct Reference}
+\label{struct_noeud}\index{Noeud@{Noeud}}
+
+
+Objet qui décrit un noeud du \mbox{\hyperlink{struct_tas}{Tas}}.  
+
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}}
+\item 
+unsigned int \mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}}
+\item 
+struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ \mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}
+\item 
+struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ \mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Objet qui décrit un noeud du \mbox{\hyperlink{struct_tas}{Tas}}. 
+
+Objet qui dÃ©crit un noeud du \mbox{\hyperlink{struct_tas}{Tas}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \+: variable qui contient 0 ou 1 \\
+\hline
+{\em freq} & \+: variable qui contient la frequence d\textquotesingle{}un caractère \\
+\hline
+{\em fg} & \+: Similaire à fd, pointeur vers les noeuds enfants gauche et droit\\
+\hline
+\end{DoxyParams}
+\mbox{\hyperlink{struct_noeud}{Noeud}} est une structure de donnée qui contient les informations d\textquotesingle{}un noeud
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \+: variable qui contient 0 ou 1 \\
+\hline
+{\em freq} & \+: variable qui contient la frequence d\textquotesingle{}un caractÃ¨re \\
+\hline
+{\em fg} & \+: Similaire Ã  fd, pointeur vers les noeuds enfants gauche et droit\\
+\hline
+\end{DoxyParams}
+\mbox{\hyperlink{struct_noeud}{Noeud}} est une structure de donnÃ©e qui contient les informations d\textquotesingle{}un noeud 
+
+Definition at line 15 of file dehuf.\+c.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}\label{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}} 
+\index{Noeud@{Noeud}!data@{data}}
+\index{data@{data}!Noeud@{Noeud}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily char data}
+
+
+
+Definition at line 17 of file dehuf.\+c.
+
+
+
+Referenced by affiche\+Code(), calcul\+Longeur(), codage\+Arbre(), decode\+\_\+file(), decode\+\_\+tree(), nouveau\+Noeud(), and trouve\+Carac().
+
+\mbox{\Hypertarget{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}\label{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}} 
+\index{Noeud@{Noeud}!fd@{fd}}
+\index{fd@{fd}!Noeud@{Noeud}}
+\doxysubsubsection{\texorpdfstring{fd}{fd}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ fd}
+
+
+
+Definition at line 19 of file dehuf.\+c.
+
+
+
+Referenced by affiche\+Code(), calcul\+Longeur(), codage\+Arbre(), decode\+\_\+file(), decode\+\_\+tree(), Huffman\+Codes(), nouveau\+Noeud(), and trouve\+Carac().
+
+\mbox{\Hypertarget{struct_noeud_aded633a04f8af604b1a9155f687c8113}\label{struct_noeud_aded633a04f8af604b1a9155f687c8113}} 
+\index{Noeud@{Noeud}!fg@{fg}}
+\index{fg@{fg}!Noeud@{Noeud}}
+\doxysubsubsection{\texorpdfstring{fg}{fg}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ fg}
+
+
+
+Definition at line 19 of file dehuf.\+c.
+
+
+
+Referenced by affiche\+Code(), calcul\+Longeur(), codage\+Arbre(), decode\+\_\+file(), decode\+\_\+tree(), Huffman\+Codes(), nouveau\+Noeud(), and trouve\+Carac().
+
+\mbox{\Hypertarget{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}\label{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}} 
+\index{Noeud@{Noeud}!freq@{freq}}
+\index{freq@{freq}!Noeud@{Noeud}}
+\doxysubsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily unsigned int freq}
+
+
+
+Definition at line 18 of file dehuf.\+c.
+
+
+
+Referenced by calcul\+Longeur(), Huffman\+Codes(), insere\+Noeud(), nouveau\+Noeud(), and Tasser().
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Pups/\+Documents/\+P\+R\+O\+J\+E\+T\+\_\+\+C/\+H\+U\+F\+F\+\_\+\+F\+I\+N\+A\+L/git/\mbox{\hyperlink{dehuf_8c}{dehuf.\+c}}\item 
+C\+:/\+Users/\+Pups/\+Documents/\+P\+R\+O\+J\+E\+T\+\_\+\+C/\+H\+U\+F\+F\+\_\+\+F\+I\+N\+A\+L/git/\mbox{\hyperlink{huf_8c}{huf.\+c}}\end{DoxyCompactItemize}

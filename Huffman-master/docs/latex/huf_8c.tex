@@ -1,0 +1,1148 @@
+\hypertarget{huf_8c}{}\doxysection{C\+:/\+Users/\+Pups/\+Documents/\+P\+R\+O\+J\+E\+T\+\_\+\+C/\+H\+U\+F\+F\+\_\+\+F\+I\+N\+A\+L/git/huf.c File Reference}
+\label{huf_8c}\index{C:/Users/Pups/Documents/PROJET\_C/HUFF\_FINAL/git/huf.c@{C:/Users/Pups/Documents/PROJET\_C/HUFF\_FINAL/git/huf.c}}
+
+
+Huffman Compressor/\+Decompressor.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_dist}{Dist}}
+\begin{DoxyCompactList}\small\item\em Objet distribution des caractères. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_noeud}{Noeud}}
+\begin{DoxyCompactList}\small\item\em Objet qui d�crit un noeud du \mbox{\hyperlink{struct_tas}{Tas}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_tas}{Tas}}
+\begin{DoxyCompactList}\small\item\em Objet qui d�crit le \mbox{\hyperlink{struct_tas}{Tas}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{huf_8c_a39a2b19cb2acdfd409c1928dbb71b62a}{M\+A\+X\+\_\+\+T\+R\+E\+E\+\_\+\+HT}}~20
+\item 
+\#define \mbox{\hyperlink{huf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}{E\+R\+R\+O\+R\+\_\+10}}~\char`\"{}Impossible d\textquotesingle{}allouer la mémoire\textbackslash{}n\char`\"{}
+\item 
+\#define \mbox{\hyperlink{huf_8c_a057ba4afa18a4c0c09dcf4cd5747d7ac}{C\+A\+P\+A\+C\+I\+T\+Y\+\_\+\+M\+AX}}~256
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{huf_8c_a2a719f959a9ec38f09b9d1e81524dcb6}{free\+Huffman}} (struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$tas)
+\begin{DoxyCompactList}\small\item\em fonction de libère de tas. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_a4b95e4f9f3462e28caf0be063d7a3749}{free\+Dist}} (\mbox{\hyperlink{struct_dist}{Dist}} $\ast$dist)
+\begin{DoxyCompactList}\small\item\em fonction de libération de dist. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{huf_8c_aa582b5e55c369eeb3e227cbc3fa78b1b}{in\+Array}} (char $\ast$tab, int size\+\_\+tab, char c)
+\begin{DoxyCompactList}\small\item\em Vérifie si un char est dans le tableau de char, retourne la position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_a2894576418d17462e7fbeef9a42b31c8}{handle\+Alloc}} (void $\ast$pt)
+\item 
+\mbox{\hyperlink{struct_dist}{Dist}} $\ast$ \mbox{\hyperlink{huf_8c_aa3595ca6d26f4921757d41e14c3342a7}{load\+File}} (char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Fonction qui ouvre le ficher, et renvoie la structure de distribution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}{affiche\+Tab}} (int tab\mbox{[}$\,$\mbox{]}, int n)
+\item 
+struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ \mbox{\hyperlink{huf_8c_a3af53c910441fff58d730d141863aaf8}{nouveau\+Noeud}} (char data, unsigned freq)
+\item 
+struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$ \mbox{\hyperlink{huf_8c_a9d771465017408dcb1a3cca1ebdb1e8e}{nouveau\+Tas}} (unsigned capacity)
+\begin{DoxyCompactList}\small\item\em Fonction de création et d\textquotesingle{}allocation d\textquotesingle{}un nouveau tas avec une capacité donnée. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_a4b451c1feaea27dd3ed9d1a72922a909}{echange\+Noeud}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$$\ast$a, struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$$\ast$b)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}échange de deux Noeuds, utilisant un pointeur sur un pointeur et pas des copies. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_a6b82e942fe6d8221ae6758c3c4afe944}{Tasser}} (struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$tas, int ind)
+\begin{DoxyCompactList}\small\item\em Fonction qui va réarranger le tas afin qu\textquotesingle{}il respecte à nouveau ses propriétés. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ \mbox{\hyperlink{huf_8c_a5e2dca14447a9aedd51c7e47b8208569}{extraire\+Min}} (struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$tas)
+\begin{DoxyCompactList}\small\item\em Fonction qui va extraire le minimun. On réduit la taille du tableau et le plus grand élément est placé au début du tableau, donc on doit tasser à nouveau. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_aa0dff4ec2e94fae47e9e330616fa7e3c}{insere\+Noeud}} (struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$tas, struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$noeud)
+\begin{DoxyCompactList}\small\item\em Fonction qui va placer le noeud dans le tas à la bonne place,en partant de (taille T-\/1)/2 jusqu\textquotesingle{}à 0;. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_a35a7806c75bb230660a212a1cffc9923}{creer\+Tas}} (struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$tas)
+\begin{DoxyCompactList}\small\item\em Fonction qui va transformer un \char`\"{}simple tableau\char`\"{} en un vrai tas. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$ \mbox{\hyperlink{huf_8c_ad7e0fa26a2df5b22899dda5b9803902d}{Construit\+Tas}} (char data\mbox{[}$\,$\mbox{]}, int freq\mbox{[}$\,$\mbox{]}, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui va remplir le tableau de noeud suivant les 2 tableaux donnés en paramètre. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_a14af3f113125987f2e363d174ec66964}{affiche\+Code}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root, int tab\mbox{[}$\,$\mbox{]}, int top)
+\item 
+void \mbox{\hyperlink{huf_8c_aba77704e39c4b1f08533e5f933c76529}{calcul\+Longeur}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root, int tab\mbox{[}$\,$\mbox{]}, int top, int $\ast$moyencodage)
+\begin{DoxyCompactList}\small\item\em Calcule la longueur moyenne du codage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{huf_8c_ad2261504379e561a43e4ddd5d966b2a8}{trouve\+Carac}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root, unsigned char tab\mbox{[}$\,$\mbox{]}, int top, char c, unsigned char tab2\mbox{[}$\,$\mbox{]}, int $\ast$s)
+\begin{DoxyCompactList}\small\item\em Recherche un caractère à travers des noeuds. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\+\_\+bit}} (unsigned char $\ast$byte, int $\ast$pos, F\+I\+LE $\ast$fp, unsigned char e)
+\item 
+void \mbox{\hyperlink{huf_8c_ab9520bb37a93583b4fe97fd90227c935}{codage\+Arbre}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root, F\+I\+LE $\ast$fp, unsigned char $\ast$byte, int $\ast$pos)
+\item 
+void \mbox{\hyperlink{huf_8c_aaed8f0f1cfc0cd3446192e503171d585}{compresseur\+Huffman}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root, F\+I\+LE $\ast$input, F\+I\+LE $\ast$fp)
+\item 
+void \mbox{\hyperlink{huf_8c_a9ecb70d1cc63ccf0deffee2530c2c8f1}{Huffman\+Codes}} (char data\mbox{[}$\,$\mbox{]}, int freq\mbox{[}$\,$\mbox{]}, int taille, F\+I\+LE $\ast$finput, F\+I\+LE $\ast$foutput)
+\item 
+int \mbox{\hyperlink{huf_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Huffman Compressor/\+Decompressor. 
+
+\begin{DoxyAuthor}{Author}
+Jean-\/\+Charles A\+L\+LA -\/ Mathieu L\+A\+D\+E\+U\+IL
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+14 novembre 2019
+\end{DoxyDate}
+Compresseur Huffman
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{huf_8c_a057ba4afa18a4c0c09dcf4cd5747d7ac}\label{huf_8c_a057ba4afa18a4c0c09dcf4cd5747d7ac}} 
+\index{huf.c@{huf.c}!CAPACITY\_MAX@{CAPACITY\_MAX}}
+\index{CAPACITY\_MAX@{CAPACITY\_MAX}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{CAPACITY\_MAX}{CAPACITY\_MAX}}
+{\footnotesize\ttfamily \#define C\+A\+P\+A\+C\+I\+T\+Y\+\_\+\+M\+AX~256}
+
+
+
+Definition at line 20 of file huf.\+c.
+
+\mbox{\Hypertarget{huf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}\label{huf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}} 
+\index{huf.c@{huf.c}!ERROR\_10@{ERROR\_10}}
+\index{ERROR\_10@{ERROR\_10}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{ERROR\_10}{ERROR\_10}}
+{\footnotesize\ttfamily \#define E\+R\+R\+O\+R\+\_\+10~\char`\"{}Impossible d\textquotesingle{}allouer la mémoire\textbackslash{}n\char`\"{}}
+
+
+
+Definition at line 19 of file huf.\+c.
+
+\mbox{\Hypertarget{huf_8c_a39a2b19cb2acdfd409c1928dbb71b62a}\label{huf_8c_a39a2b19cb2acdfd409c1928dbb71b62a}} 
+\index{huf.c@{huf.c}!MAX\_TREE\_HT@{MAX\_TREE\_HT}}
+\index{MAX\_TREE\_HT@{MAX\_TREE\_HT}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_TREE\_HT}{MAX\_TREE\_HT}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+T\+R\+E\+E\+\_\+\+HT~20}
+
+
+
+Definition at line 18 of file huf.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{huf_8c_a14af3f113125987f2e363d174ec66964}\label{huf_8c_a14af3f113125987f2e363d174ec66964}} 
+\index{huf.c@{huf.c}!afficheCode@{afficheCode}}
+\index{afficheCode@{afficheCode}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{afficheCode()}{afficheCode()}}
+{\footnotesize\ttfamily void affiche\+Code (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root,  }\item[{int}]{tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{top }\end{DoxyParamCaption})}
+
+
+
+Definition at line 408 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{409 \{}
+\DoxyCodeLine{410     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \{  \textcolor{comment}{// arbitrairement le fils gauche sera codé 0}}
+\DoxyCodeLine{411         tab[top] = 0;}
+\DoxyCodeLine{412         \mbox{\hyperlink{huf_8c_a14af3f113125987f2e363d174ec66964}{afficheCode}}(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}, tab, top + 1);}
+\DoxyCodeLine{413     \}}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}) \{ \textcolor{comment}{// arbitrairement le fils droit sera codé 1}}
+\DoxyCodeLine{416         tab[top] = 1;}
+\DoxyCodeLine{417         \mbox{\hyperlink{huf_8c_a14af3f113125987f2e363d174ec66964}{afficheCode}}(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}, tab, top + 1);}
+\DoxyCodeLine{418     \}}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421     \textcolor{keywordflow}{if} (!(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \&\& !(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}})) \{ \textcolor{comment}{// si on arrive à une feuille on affiche le code}}
+\DoxyCodeLine{422         printf(\textcolor{stringliteral}{"codeChar(\%c)="}, root-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}});}
+\DoxyCodeLine{423         \mbox{\hyperlink{huf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}{afficheTab}}(tab, top);}
+\DoxyCodeLine{424     \}}
+\DoxyCodeLine{425 \}}
+
+\end{DoxyCode}
+
+
+References affiche\+Tab(), Noeud\+::data, Noeud\+::fd, Noeud\+::fg, and Tas\+::tab.
+
+
+
+Referenced by Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}\label{huf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}} 
+\index{huf.c@{huf.c}!afficheTab@{afficheTab}}
+\index{afficheTab@{afficheTab}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{afficheTab()}{afficheTab()}}
+{\footnotesize\ttfamily void affiche\+Tab (\begin{DoxyParamCaption}\item[{int}]{tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Definition at line 210 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{211 \{}
+\DoxyCodeLine{212     \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{213     \textcolor{keywordflow}{for} (i = 0; i < n; ++i)}
+\DoxyCodeLine{214         printf(\textcolor{stringliteral}{"\%d"}, tab[i]);}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     printf(\textcolor{stringliteral}{"\(\backslash\)n"});}
+\DoxyCodeLine{217 \}}
+
+\end{DoxyCode}
+
+
+Referenced by affiche\+Code().
+
+\mbox{\Hypertarget{huf_8c_aba77704e39c4b1f08533e5f933c76529}\label{huf_8c_aba77704e39c4b1f08533e5f933c76529}} 
+\index{huf.c@{huf.c}!calculLongeur@{calculLongeur}}
+\index{calculLongeur@{calculLongeur}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{calculLongeur()}{calculLongeur()}}
+{\footnotesize\ttfamily void calcul\+Longeur (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root,  }\item[{int}]{tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{top,  }\item[{int $\ast$}]{moyencodage }\end{DoxyParamCaption})}
+
+
+
+Calcule la longueur moyenne du codage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & \+: Pointeur sur un noeud \\
+\hline
+{\em tab} & \+: Tableau d\textquotesingle{}entier \\
+\hline
+{\em top} & \+: Taille de tab \\
+\hline
+{\em moyencodage} & \+: Adresse de la variable du codage moyen \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 435 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{436 \{}
+\DoxyCodeLine{437     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \{}
+\DoxyCodeLine{438         tab[top] = 0;}
+\DoxyCodeLine{439         \mbox{\hyperlink{huf_8c_aba77704e39c4b1f08533e5f933c76529}{calculLongeur}}(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}, tab, top + 1, moyencodage);}
+\DoxyCodeLine{440     \}}
+\DoxyCodeLine{441     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}) \{}
+\DoxyCodeLine{442         tab[top] = 1;}
+\DoxyCodeLine{443         \mbox{\hyperlink{huf_8c_aba77704e39c4b1f08533e5f933c76529}{calculLongeur}}(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}, tab, top + 1,moyencodage);}
+\DoxyCodeLine{444     \}}
+\DoxyCodeLine{445     \textcolor{keywordflow}{if} (!(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \&\& !(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}})) \{}
+\DoxyCodeLine{446         \textcolor{keywordflow}{if}(root-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}} != -\/96) \textcolor{comment}{// si la feuille est différente du EOF}}
+\DoxyCodeLine{447             (*moyencodage) += top * root-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}}; \textcolor{comment}{// on ajoute la longeur moyenne à diviser par le total freq}}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449     \}}
+\DoxyCodeLine{450 \}}
+
+\end{DoxyCode}
+
+
+References Noeud\+::data, Noeud\+::fd, Noeud\+::fg, Noeud\+::freq, and Tas\+::tab.
+
+
+
+Referenced by Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_ab9520bb37a93583b4fe97fd90227c935}\label{huf_8c_ab9520bb37a93583b4fe97fd90227c935}} 
+\index{huf.c@{huf.c}!codageArbre@{codageArbre}}
+\index{codageArbre@{codageArbre}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{codageArbre()}{codageArbre()}}
+{\footnotesize\ttfamily void codage\+Arbre (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root,  }\item[{F\+I\+LE $\ast$}]{fp,  }\item[{unsigned char $\ast$}]{byte,  }\item[{int $\ast$}]{pos }\end{DoxyParamCaption})}
+
+
+
+Definition at line 516 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{517 \{}
+\DoxyCodeLine{518     \textcolor{keywordflow}{if}((root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) || (root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}})) \textcolor{comment}{// Si le noeud n'est pas une feuille on code 0 pour l'entête}}
+\DoxyCodeLine{519     \{}
+\DoxyCodeLine{520         \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\_bit}}(\textcolor{keywordtype}{byte},pos, fp, \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{522         \mbox{\hyperlink{huf_8c_ab9520bb37a93583b4fe97fd90227c935}{codageArbre}}(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}, fp,\textcolor{keywordtype}{byte},pos);}
+\DoxyCodeLine{523         \mbox{\hyperlink{huf_8c_ab9520bb37a93583b4fe97fd90227c935}{codageArbre}}(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}, fp,\textcolor{keywordtype}{byte},pos);}
+\DoxyCodeLine{524     \}}
+\DoxyCodeLine{525     \textcolor{keywordflow}{else} \textcolor{comment}{// Si on arrive sur une feuille}}
+\DoxyCodeLine{526     \{}
+\DoxyCodeLine{527         \textcolor{keywordtype}{int} bit;}
+\DoxyCodeLine{528         \textcolor{keywordtype}{int} base = 0x80;}
+\DoxyCodeLine{529         \textcolor{keywordtype}{char} c;}
+\DoxyCodeLine{530         bit = root-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}}; \textcolor{comment}{//  char to int conversion}}
+\DoxyCodeLine{531         \textcolor{comment}{/*}}
+\DoxyCodeLine{532 \textcolor{comment}{        *  Compare chaque bit avec}}
+\DoxyCodeLine{533 \textcolor{comment}{        *  0x80,0x40,...,0x01}}
+\DoxyCodeLine{534 \textcolor{comment}{        *  et écrit le code binaire dans le}}
+\DoxyCodeLine{535 \textcolor{comment}{        *  fichier}}
+\DoxyCodeLine{536 \textcolor{comment}{        */}}
+\DoxyCodeLine{537         \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\_bit}}(\textcolor{keywordtype}{byte},pos, fp, \textcolor{charliteral}{'1'}); \textcolor{comment}{// On va coder un 1 puis le caractère en binaire}}
+\DoxyCodeLine{538         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i =0 ; i<8;i++)}
+\DoxyCodeLine{539         \{}
+\DoxyCodeLine{540              c = bit \& base ? \textcolor{charliteral}{'1'} : \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{541              \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\_bit}}(\textcolor{keywordtype}{byte},pos, fp, c);}
+\DoxyCodeLine{542             base=base>>1;}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{544         \}}
+\DoxyCodeLine{545     \}}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547 \}}
+
+\end{DoxyCode}
+
+
+References Noeud\+::data, Noeud\+::fd, Noeud\+::fg, and write\+\_\+bit().
+
+
+
+Referenced by compresseur\+Huffman().
+
+\mbox{\Hypertarget{huf_8c_aaed8f0f1cfc0cd3446192e503171d585}\label{huf_8c_aaed8f0f1cfc0cd3446192e503171d585}} 
+\index{huf.c@{huf.c}!compresseurHuffman@{compresseurHuffman}}
+\index{compresseurHuffman@{compresseurHuffman}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{compresseurHuffman()}{compresseurHuffman()}}
+{\footnotesize\ttfamily void compresseur\+Huffman (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root,  }\item[{F\+I\+LE $\ast$}]{input,  }\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+
+
+Definition at line 549 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{550 \{}
+\DoxyCodeLine{551     \textcolor{keywordtype}{char} \mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}};}
+\DoxyCodeLine{552     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} tab[\mbox{\hyperlink{huf_8c_a39a2b19cb2acdfd409c1928dbb71b62a}{MAX\_TREE\_HT}}], tab2[\mbox{\hyperlink{huf_8c_a39a2b19cb2acdfd409c1928dbb71b62a}{MAX\_TREE\_HT}}], x=0;}
+\DoxyCodeLine{553     \textcolor{keywordtype}{int} start = 0,taille2=0, pos=0, reste\_eof=0;}
+\DoxyCodeLine{554     \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} tinput=0, toutput=0;}
+\DoxyCodeLine{555     \textcolor{keywordtype}{float} compression=1.0;}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557     \mbox{\hyperlink{huf_8c_ab9520bb37a93583b4fe97fd90227c935}{codageArbre}}(root, fp, \&x, \&pos); \textcolor{comment}{// On code l'entête donc codage de l'arbre et du dictionnaire}}
+\DoxyCodeLine{558                                      \textcolor{comment}{// sous la forme 00..01[8bits] 01[8bits] 1 [8bits]}}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{560     \textcolor{keywordflow}{while}( (\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}} = getc(input)) !=EOF ) \textcolor{comment}{// On lit le ficher en entrée}}
+\DoxyCodeLine{561     \{}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{563        \mbox{\hyperlink{huf_8c_ad2261504379e561a43e4ddd5d966b2a8}{trouveCarac}}(root,tab,start, \mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}} , tab2, \&taille2); \textcolor{comment}{// On cherche chaque caractère du fichier dans l'arbre}}
+\DoxyCodeLine{564                                                             \textcolor{comment}{// et on renvoie le tableau qui contient le code}}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566 }
+\DoxyCodeLine{567         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i< taille2; i++)}
+\DoxyCodeLine{568         \{}
+\DoxyCodeLine{569             \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\_bit}}(\&x,\&pos, fp, tab2[i]); \textcolor{comment}{// on écrit le code dans le buffer}}
+\DoxyCodeLine{570         \}}
+\DoxyCodeLine{571 }
+\DoxyCodeLine{572     \}}
+\DoxyCodeLine{573 }
+\DoxyCodeLine{574     \textcolor{keywordflow}{if}( input)  \textcolor{comment}{//On regarde la taille du ficher en entrée}}
+\DoxyCodeLine{575     \{}
+\DoxyCodeLine{576     fseek(input, 0, SEEK\_END);}
+\DoxyCodeLine{577     tinput= ftell(input);}
+\DoxyCodeLine{578     \}}
+\DoxyCodeLine{579 }
+\DoxyCodeLine{580     fclose(input); \textcolor{comment}{// On peut le fermer on n'en a plus besoin}}
+\DoxyCodeLine{581 }
+\DoxyCodeLine{582     \textcolor{keywordtype}{char} eof = -\/96;}
+\DoxyCodeLine{583     \mbox{\hyperlink{huf_8c_ad2261504379e561a43e4ddd5d966b2a8}{trouveCarac}}(root,tab,start, eof , tab2, \&taille2); \textcolor{comment}{// CODAGE DU EOF}}
+\DoxyCodeLine{584 }
+\DoxyCodeLine{585     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i< taille2; i++)}
+\DoxyCodeLine{586     \{}
+\DoxyCodeLine{587             \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\_bit}}(\&x,\&pos, fp, tab2[i]);}
+\DoxyCodeLine{588 }
+\DoxyCodeLine{589 }
+\DoxyCodeLine{590     \}}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592     reste\_eof=pos; \textcolor{comment}{//Si le EOF n'est pas codé entièrement sur 8bits, si il est plus grand ou s'il faut rajouter}}
+\DoxyCodeLine{593                     \textcolor{comment}{// des 0 pour finir l'octet à coder}}
+\DoxyCodeLine{594 }
+\DoxyCodeLine{595 }
+\DoxyCodeLine{596     \textcolor{keywordflow}{if}(reste\_eof<8) \textcolor{comment}{// On ajoute  (8-\/ la position) +1 '0' car position est automatiquement incrémenté par write\_bit}}
+\DoxyCodeLine{597     \{}
+\DoxyCodeLine{598         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<(8-\/reste\_eof)+1;i++)}
+\DoxyCodeLine{599             \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\_bit}}(\&x,\&pos, fp, \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{600     \}}
+\DoxyCodeLine{601     \textcolor{keywordflow}{else} \textcolor{comment}{// Si on est à 8bits ou si EOF >8bits on ajoute ce qui reste}}
+\DoxyCodeLine{602     \{}
+\DoxyCodeLine{603         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i< (taille2-\/reste\_eof); i++)}
+\DoxyCodeLine{604         \{}
+\DoxyCodeLine{605             \mbox{\hyperlink{huf_8c_a3440fab03e8eec352f1079c5654206ca}{write\_bit}}(\&x,\&pos, fp, tab2[i]);}
+\DoxyCodeLine{606         \}}
+\DoxyCodeLine{607     \}}
+\DoxyCodeLine{608     \textcolor{keywordflow}{if}(fp)}
+\DoxyCodeLine{609     \{}
+\DoxyCodeLine{610         toutput= ftell (fp); \textcolor{comment}{//on récupère la taille du fichier sortie}}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{612     \}}
+\DoxyCodeLine{613 }
+\DoxyCodeLine{614 }
+\DoxyCodeLine{615     compression =  ((float)toutput/(\textcolor{keywordtype}{float})tinput);}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{617     printf(\textcolor{stringliteral}{"Taille originelle : \%ld octet ; taille compressée \%ld octet ;compression  \%.3f \%\%  \(\backslash\)n"},tinput, toutput, 100*(1-\/compression));}
+\DoxyCodeLine{618     fclose(fp);}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{620 \}}
+
+\end{DoxyCode}
+
+
+References codage\+Arbre(), M\+A\+X\+\_\+\+T\+R\+E\+E\+\_\+\+HT, Tas\+::tab, trouve\+Carac(), and write\+\_\+bit().
+
+
+
+Referenced by Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_ad7e0fa26a2df5b22899dda5b9803902d}\label{huf_8c_ad7e0fa26a2df5b22899dda5b9803902d}} 
+\index{huf.c@{huf.c}!ConstruitTas@{ConstruitTas}}
+\index{ConstruitTas@{ConstruitTas}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{ConstruitTas()}{ConstruitTas()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$ Construit\+Tas (\begin{DoxyParamCaption}\item[{char}]{data\mbox{[}$\,$\mbox{]},  }\item[{int}]{freq\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui va remplir le tableau de noeud suivant les 2 tableaux donnés en paramètre. 
+
+
+
+Definition at line 391 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{392 \{}
+\DoxyCodeLine{393     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_tas}{Tas}}* tas = \mbox{\hyperlink{huf_8c_a9d771465017408dcb1a3cca1ebdb1e8e}{nouveauTas}}(\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}});}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{395     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}}; ++i)}
+\DoxyCodeLine{396         tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[i] = \mbox{\hyperlink{huf_8c_a3af53c910441fff58d730d141863aaf8}{nouveauNoeud}}(data[i], freq[i]);}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398     tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}} = \mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}};}
+\DoxyCodeLine{399     \mbox{\hyperlink{huf_8c_a35a7806c75bb230660a212a1cffc9923}{creerTas}}(tas);}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401     \textcolor{keywordflow}{return} tas;}
+\DoxyCodeLine{402 \}}
+
+\end{DoxyCode}
+
+
+References creer\+Tas(), nouveau\+Noeud(), nouveau\+Tas(), Tas\+::tab, and Tas\+::taille.
+
+
+
+Referenced by Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_a35a7806c75bb230660a212a1cffc9923}\label{huf_8c_a35a7806c75bb230660a212a1cffc9923}} 
+\index{huf.c@{huf.c}!creerTas@{creerTas}}
+\index{creerTas@{creerTas}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{creerTas()}{creerTas()}}
+{\footnotesize\ttfamily void creer\+Tas (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$}]{tas }\end{DoxyParamCaption})}
+
+
+
+Fonction qui va transformer un \char`\"{}simple tableau\char`\"{} en un vrai tas. 
+
+
+
+Definition at line 372 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{373 \{}
+\DoxyCodeLine{374     \textcolor{keywordtype}{int} n = tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}} -\/ 1;}
+\DoxyCodeLine{375     \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{376     \textcolor{keywordflow}{for} (i = (n -\/ 1) / 2; i >= 0; i-\/-\/)}
+\DoxyCodeLine{377     \{}
+\DoxyCodeLine{378         \mbox{\hyperlink{huf_8c_a6b82e942fe6d8221ae6758c3c4afe944}{Tasser}}(tas, i);}
+\DoxyCodeLine{379     \}}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381 \}}
+
+\end{DoxyCode}
+
+
+References Tas\+::taille, and Tasser().
+
+
+
+Referenced by Construit\+Tas().
+
+\mbox{\Hypertarget{huf_8c_a4b451c1feaea27dd3ed9d1a72922a909}\label{huf_8c_a4b451c1feaea27dd3ed9d1a72922a909}} 
+\index{huf.c@{huf.c}!echangeNoeud@{echangeNoeud}}
+\index{echangeNoeud@{echangeNoeud}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{echangeNoeud()}{echangeNoeud()}}
+{\footnotesize\ttfamily void echange\+Noeud (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$$\ast$}]{a,  }\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$$\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}échange de deux Noeuds, utilisant un pointeur sur un pointeur et pas des copies. 
+
+
+
+Definition at line 286 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{287 \{}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}* tmp = *a;}
+\DoxyCodeLine{290     *a = *b;}
+\DoxyCodeLine{291     *b = tmp;}
+\DoxyCodeLine{292 \}}
+
+\end{DoxyCode}
+
+
+Referenced by Tasser().
+
+\mbox{\Hypertarget{huf_8c_a5e2dca14447a9aedd51c7e47b8208569}\label{huf_8c_a5e2dca14447a9aedd51c7e47b8208569}} 
+\index{huf.c@{huf.c}!extraireMin@{extraireMin}}
+\index{extraireMin@{extraireMin}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{extraireMin()}{extraireMin()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ extraire\+Min (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$}]{tas }\end{DoxyParamCaption})}
+
+
+
+Fonction qui va extraire le minimun. On réduit la taille du tableau et le plus grand élément est placé au début du tableau, donc on doit tasser à nouveau. 
+
+\begin{DoxyReturn}{Returns}
+Le noeud le plus petit du tas. 
+\end{DoxyReturn}
+
+
+Definition at line 332 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{333 \{}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}* tmp = tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[0];}
+\DoxyCodeLine{336     tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[0] = tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}} -\/ 1];}
+\DoxyCodeLine{337     tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}}=tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}}-\/1;}
+\DoxyCodeLine{338     \mbox{\hyperlink{huf_8c_a6b82e942fe6d8221ae6758c3c4afe944}{Tasser}}(tas, 0);}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{341 \}}
+
+\end{DoxyCode}
+
+
+References Tas\+::tab, Tas\+::taille, and Tasser().
+
+
+
+Referenced by Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_a4b95e4f9f3462e28caf0be063d7a3749}\label{huf_8c_a4b95e4f9f3462e28caf0be063d7a3749}} 
+\index{huf.c@{huf.c}!freeDist@{freeDist}}
+\index{freeDist@{freeDist}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{freeDist()}{freeDist()}}
+{\footnotesize\ttfamily void free\+Dist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_dist}{Dist}} $\ast$}]{dist }\end{DoxyParamCaption})}
+
+
+
+fonction de libération de dist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dist} & \+: Adresse de l\textquotesingle{}objet \mbox{\hyperlink{struct_dist}{Dist}} à détruire \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 99 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{100 \{}
+\DoxyCodeLine{101     free(dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}});}
+\DoxyCodeLine{102     free(dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}});}
+\DoxyCodeLine{103     free(dist);}
+\DoxyCodeLine{104 \}}
+
+\end{DoxyCode}
+
+
+References Dist\+::freq, and Dist\+::tab.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{huf_8c_a2a719f959a9ec38f09b9d1e81524dcb6}\label{huf_8c_a2a719f959a9ec38f09b9d1e81524dcb6}} 
+\index{huf.c@{huf.c}!freeHuffman@{freeHuffman}}
+\index{freeHuffman@{freeHuffman}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{freeHuffman()}{freeHuffman()}}
+{\footnotesize\ttfamily void free\+Huffman (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$}]{tas }\end{DoxyParamCaption})}
+
+
+
+fonction de libère de tas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tas} & \+: Adresse de l\textquotesingle{}objet struct \mbox{\hyperlink{struct_tas}{Tas}} à détruire \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 87 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{88 \{}
+\DoxyCodeLine{89     free(tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}});}
+\DoxyCodeLine{90     free(tas);}
+\DoxyCodeLine{91 \}}
+
+\end{DoxyCode}
+
+
+References Tas\+::tab.
+
+
+
+Referenced by Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_a2894576418d17462e7fbeef9a42b31c8}\label{huf_8c_a2894576418d17462e7fbeef9a42b31c8}} 
+\index{huf.c@{huf.c}!handleAlloc@{handleAlloc}}
+\index{handleAlloc@{handleAlloc}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{handleAlloc()}{handleAlloc()}}
+{\footnotesize\ttfamily void handle\+Alloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{pt }\end{DoxyParamCaption})}
+
+
+
+Definition at line 133 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{134 \{}
+\DoxyCodeLine{135     fprintf(stderr,\mbox{\hyperlink{huf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}{ERROR\_10}});}
+\DoxyCodeLine{136     free(pt);}
+\DoxyCodeLine{137 \}}
+
+\end{DoxyCode}
+
+
+References E\+R\+R\+O\+R\+\_\+10.
+
+
+
+Referenced by load\+File(), nouveau\+Noeud(), and nouveau\+Tas().
+
+\mbox{\Hypertarget{huf_8c_a9ecb70d1cc63ccf0deffee2530c2c8f1}\label{huf_8c_a9ecb70d1cc63ccf0deffee2530c2c8f1}} 
+\index{huf.c@{huf.c}!HuffmanCodes@{HuffmanCodes}}
+\index{HuffmanCodes@{HuffmanCodes}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{HuffmanCodes()}{HuffmanCodes()}}
+{\footnotesize\ttfamily void Huffman\+Codes (\begin{DoxyParamCaption}\item[{char}]{data\mbox{[}$\,$\mbox{]},  }\item[{int}]{freq\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille,  }\item[{F\+I\+LE $\ast$}]{finput,  }\item[{F\+I\+LE $\ast$}]{foutput }\end{DoxyParamCaption})}
+
+
+
+Definition at line 622 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{623   \{}
+\DoxyCodeLine{624     \textcolor{keywordtype}{int} tab[\mbox{\hyperlink{huf_8c_a39a2b19cb2acdfd409c1928dbb71b62a}{MAX\_TREE\_HT}}], start = 0,  moyen=0, sommefreq=0;}
+\DoxyCodeLine{625     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}} *\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}, *\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}, *top;}
+\DoxyCodeLine{626 }
+\DoxyCodeLine{627     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0 ; i<taille ;i++)}
+\DoxyCodeLine{628     \{}
+\DoxyCodeLine{629             sommefreq+= \mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}}[i]; \textcolor{comment}{// on récupère la somme des frèquences}}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631     \}}
+\DoxyCodeLine{632 }
+\DoxyCodeLine{633 }
+\DoxyCodeLine{634     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_tas}{Tas}}* tas = \mbox{\hyperlink{huf_8c_ad7e0fa26a2df5b22899dda5b9803902d}{ConstruitTas}}(data, freq, \mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}});}
+\DoxyCodeLine{635     \textcolor{keywordflow}{while} (tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}} != 1) \{ \textcolor{comment}{//tant qu'on arrive pas à la racine}}
+\DoxyCodeLine{636 }
+\DoxyCodeLine{637 }
+\DoxyCodeLine{638         fg = \mbox{\hyperlink{huf_8c_a5e2dca14447a9aedd51c7e47b8208569}{extraireMin}}(tas); \textcolor{comment}{//on extrait les 2 noeuds min}}
+\DoxyCodeLine{639         fd = \mbox{\hyperlink{huf_8c_a5e2dca14447a9aedd51c7e47b8208569}{extraireMin}}(tas);}
+\DoxyCodeLine{640         top = \mbox{\hyperlink{huf_8c_a3af53c910441fff58d730d141863aaf8}{nouveauNoeud}}(\textcolor{charliteral}{'X'}, fg-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}} + fd-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}}); \textcolor{comment}{//on crée un noeud parent qui n'a pas de data utile}}
+\DoxyCodeLine{641         top-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}} = fg;}
+\DoxyCodeLine{642         top-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}} = fd;}
+\DoxyCodeLine{643         \mbox{\hyperlink{huf_8c_aa0dff4ec2e94fae47e9e330616fa7e3c}{insereNoeud}}(tas, top); \textcolor{comment}{//on insère le noeud dans le tas}}
+\DoxyCodeLine{644     \}}
+\DoxyCodeLine{645 }
+\DoxyCodeLine{646     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}* root = \mbox{\hyperlink{huf_8c_a5e2dca14447a9aedd51c7e47b8208569}{extraireMin}}(tas); \textcolor{comment}{//il reste un seul noeud on l'extrait c'est la racine}}
+\DoxyCodeLine{647     \mbox{\hyperlink{huf_8c_a2a719f959a9ec38f09b9d1e81524dcb6}{freeHuffman}}(tas); \textcolor{comment}{//on peut libèrer le tas on continue à travailler sur l'arbre simplement}}
+\DoxyCodeLine{648 }
+\DoxyCodeLine{649     \mbox{\hyperlink{huf_8c_aba77704e39c4b1f08533e5f933c76529}{calculLongeur}}(root, tab, start, \&moyen); \textcolor{comment}{// calcul de la longueur moyenne dans moyen}}
+\DoxyCodeLine{650 }
+\DoxyCodeLine{651     \mbox{\hyperlink{huf_8c_a14af3f113125987f2e363d174ec66964}{afficheCode}}(root, tab, start); \textcolor{comment}{// affichage de chaque code}}
+\DoxyCodeLine{652     printf(\textcolor{stringliteral}{"Longueur moyenne : \%.2f\(\backslash\)n"}, (\textcolor{keywordtype}{float})moyen/(\textcolor{keywordtype}{float})sommefreq);  \textcolor{comment}{// affichage de la longueur moyenne}}
+\DoxyCodeLine{653    \mbox{\hyperlink{huf_8c_aaed8f0f1cfc0cd3446192e503171d585}{compresseurHuffman}}(root,finput, foutput); \textcolor{comment}{// on compresse}}
+\DoxyCodeLine{654    free(root); \textcolor{comment}{// on peut libèrer l'arbre}}
+\DoxyCodeLine{655 }
+\DoxyCodeLine{656 \}}
+
+\end{DoxyCode}
+
+
+References affiche\+Code(), calcul\+Longeur(), compresseur\+Huffman(), Construit\+Tas(), extraire\+Min(), Noeud\+::fd, Noeud\+::fg, free\+Huffman(), Noeud\+::freq, insere\+Noeud(), M\+A\+X\+\_\+\+T\+R\+E\+E\+\_\+\+HT, nouveau\+Noeud(), Tas\+::tab, and Tas\+::taille.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{huf_8c_aa582b5e55c369eeb3e227cbc3fa78b1b}\label{huf_8c_aa582b5e55c369eeb3e227cbc3fa78b1b}} 
+\index{huf.c@{huf.c}!inArray@{inArray}}
+\index{inArray@{inArray}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{inArray()}{inArray()}}
+{\footnotesize\ttfamily int in\+Array (\begin{DoxyParamCaption}\item[{char $\ast$}]{tab,  }\item[{int}]{size\+\_\+tab,  }\item[{char}]{c }\end{DoxyParamCaption})}
+
+
+
+Vérifie si un char est dans le tableau de char, retourne la position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tab} & \+: Tableau de caractère \\
+\hline
+{\em size\+\_\+tab} & \+: Taille du tableau \\
+\hline
+{\em c} & \+: Caractère \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 si c est dans tab sinon une valeur positive 
+\end{DoxyReturn}
+
+
+Definition at line 115 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{116 \{}
+\DoxyCodeLine{117   \textcolor{keywordflow}{for}( \textcolor{keywordtype}{int} i=0; i<size\_tab;i++)}
+\DoxyCodeLine{118   \{}
+\DoxyCodeLine{119       \textcolor{keywordflow}{if}(tab[i]==c)}
+\DoxyCodeLine{120       \{}
+\DoxyCodeLine{121           \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{122       \}}
+\DoxyCodeLine{123   \}}
+\DoxyCodeLine{124   \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{125 \}}
+
+\end{DoxyCode}
+
+
+Referenced by load\+File().
+
+\mbox{\Hypertarget{huf_8c_aa0dff4ec2e94fae47e9e330616fa7e3c}\label{huf_8c_aa0dff4ec2e94fae47e9e330616fa7e3c}} 
+\index{huf.c@{huf.c}!insereNoeud@{insereNoeud}}
+\index{insereNoeud@{insereNoeud}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{insereNoeud()}{insereNoeud()}}
+{\footnotesize\ttfamily void insere\+Noeud (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$}]{tas,  }\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{noeud }\end{DoxyParamCaption})}
+
+
+
+Fonction qui va placer le noeud dans le tas à la bonne place,en partant de (taille T-\/1)/2 jusqu\textquotesingle{}à 0;. 
+
+
+
+Definition at line 351 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{352 \{}
+\DoxyCodeLine{353     tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}} = tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}}+1 ;}
+\DoxyCodeLine{354     \textcolor{keywordtype}{int} i = tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}} -\/ 1;}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356     \textcolor{keywordflow}{while} (i>0 \&\& noeud-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}} < tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[(i -\/ 1) / 2]-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}}) \{}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358         tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[i] = tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[(i -\/ 1) / 2];}
+\DoxyCodeLine{359         i = (i -\/ 1) / 2;}
+\DoxyCodeLine{360     \}}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{362     tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[i] = noeud;}
+\DoxyCodeLine{363 \}}
+
+\end{DoxyCode}
+
+
+References Noeud\+::freq, Tas\+::tab, and Tas\+::taille.
+
+
+
+Referenced by Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_aa3595ca6d26f4921757d41e14c3342a7}\label{huf_8c_aa3595ca6d26f4921757d41e14c3342a7}} 
+\index{huf.c@{huf.c}!loadFile@{loadFile}}
+\index{loadFile@{loadFile}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{loadFile()}{loadFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_dist}{Dist}} $\ast$ load\+File (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Fonction qui ouvre le ficher, et renvoie la structure de distribution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \+: nom du fichier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un tableau de \mbox{\hyperlink{struct_dist}{Dist}} établi par rapport au fichier 
+\end{DoxyReturn}
+
+
+Definition at line 146 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{147 \{}
+\DoxyCodeLine{148     FILE *file;}
+\DoxyCodeLine{149     \mbox{\hyperlink{struct_dist}{Dist}} *dist = malloc(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_dist}{Dist}}));}
+\DoxyCodeLine{150     dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}}=0;}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152     \textcolor{keywordtype}{char} c;}
+\DoxyCodeLine{153     \textcolor{keywordtype}{int} i=0;}
+\DoxyCodeLine{154     \textcolor{keywordtype}{int} position;}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156     \textcolor{keywordflow}{if}(!dist)}
+\DoxyCodeLine{157     \{}
+\DoxyCodeLine{158         \mbox{\hyperlink{huf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(dist);}
+\DoxyCodeLine{159     \}}
+\DoxyCodeLine{160     dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}} = malloc(\mbox{\hyperlink{huf_8c_a057ba4afa18a4c0c09dcf4cd5747d7ac}{CAPACITY\_MAX}}*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{161     \textcolor{keywordflow}{if}(!dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}})}
+\DoxyCodeLine{162     \{}
+\DoxyCodeLine{163         \mbox{\hyperlink{huf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}});}
+\DoxyCodeLine{164     \}}
+\DoxyCodeLine{165     dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}} = malloc(\mbox{\hyperlink{huf_8c_a057ba4afa18a4c0c09dcf4cd5747d7ac}{CAPACITY\_MAX}}*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{166     \textcolor{keywordflow}{if}(!dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}})}
+\DoxyCodeLine{167     \{}
+\DoxyCodeLine{168         \mbox{\hyperlink{huf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}});}
+\DoxyCodeLine{169     \}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172     \textcolor{keywordflow}{if}( (file = fopen(filename, \textcolor{stringliteral}{"rb"})) == NULL)}
+\DoxyCodeLine{173     \{}
+\DoxyCodeLine{174         fprintf(stderr,\textcolor{stringliteral}{"Impossible d'ouvrir le fichier en lecture\(\backslash\)n"});}
+\DoxyCodeLine{175         exit(1);}
+\DoxyCodeLine{176     \}}
+\DoxyCodeLine{177     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{178         \textcolor{keywordflow}{while}((c=fgetc(file))!=EOF)}
+\DoxyCodeLine{179         \{}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181             position = \mbox{\hyperlink{huf_8c_aa582b5e55c369eeb3e227cbc3fa78b1b}{inArray}}(dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}},dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}}+1,c);}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183             \textcolor{keywordflow}{if}(position== -\/1) \textcolor{comment}{// Si le caractère n'a pas encore été lu}}
+\DoxyCodeLine{184             \{}
+\DoxyCodeLine{185                 dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}}[i]=c;}
+\DoxyCodeLine{186                 dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}} = dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}}+1;}
+\DoxyCodeLine{187                 dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}}[i]=1;}
+\DoxyCodeLine{188                 i=i+1;}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190             \}}
+\DoxyCodeLine{191             \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193                 dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}}[position]=dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}}[position]+1; \textcolor{comment}{//sinon on incrémente la position}}
+\DoxyCodeLine{194             \}}
+\DoxyCodeLine{195         \}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \}}
+\DoxyCodeLine{199     \textcolor{keywordtype}{char} eof = -\/96;   \textcolor{comment}{// On ajoute le caractère ■, pour signaler la fin du fichier}}
+\DoxyCodeLine{200     dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}}[i]=eof;}
+\DoxyCodeLine{201     dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}}++;}
+\DoxyCodeLine{202     dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}}[i]=1;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     fclose(file);}
+\DoxyCodeLine{205     \textcolor{keywordflow}{return} dist;}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207 \}}
+
+\end{DoxyCode}
+
+
+References C\+A\+P\+A\+C\+I\+T\+Y\+\_\+\+M\+AX, Dist\+::freq, handle\+Alloc(), in\+Array(), Dist\+::size, and Dist\+::tab.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{huf_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{huf_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{huf.c@{huf.c}!main@{main}}
+\index{main@{main}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 664 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{665 \{}
+\DoxyCodeLine{666 }
+\DoxyCodeLine{667     \textcolor{keywordflow}{if}(argc<3)\{}
+\DoxyCodeLine{668         fprintf(stderr, \textcolor{stringliteral}{" necessite : -\/ un fichier à compresser -\/ un fichier sortie compressé \(\backslash\)n"});}
+\DoxyCodeLine{669         exit(1);}
+\DoxyCodeLine{670     \}}
+\DoxyCodeLine{671     FILE* finput = fopen(argv[1], \textcolor{stringliteral}{"rb"});}
+\DoxyCodeLine{672     \textcolor{keywordflow}{if}(!finput)\{}
+\DoxyCodeLine{673         fprintf(stderr, \textcolor{stringliteral}{"Impossible d'ouvrir le fichier à compresser : \%s\(\backslash\)n"}, argv[1]);}
+\DoxyCodeLine{674         exit(1);}
+\DoxyCodeLine{675     \}}
+\DoxyCodeLine{676 }
+\DoxyCodeLine{677     FILE* foutput = fopen(argv[2], \textcolor{stringliteral}{"wb"});}
+\DoxyCodeLine{678     \textcolor{keywordflow}{if}(!foutput)\{}
+\DoxyCodeLine{679         fprintf(stderr, \textcolor{stringliteral}{"Impossible d'ouvrir le fichier compresse : \%s\(\backslash\)n"}, argv[2]);}
+\DoxyCodeLine{680         exit(1);}
+\DoxyCodeLine{681     \}}
+\DoxyCodeLine{682 }
+\DoxyCodeLine{683 }
+\DoxyCodeLine{684     \mbox{\hyperlink{struct_dist}{Dist}} *dist;}
+\DoxyCodeLine{685     dist = \mbox{\hyperlink{huf_8c_aa3595ca6d26f4921757d41e14c3342a7}{loadFile}}(argv[1]);}
+\DoxyCodeLine{686 }
+\DoxyCodeLine{687     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i=0; i<dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}};i++)}
+\DoxyCodeLine{688     \{}
+\DoxyCodeLine{689         printf(\textcolor{stringliteral}{" Char : \%c Freq : \%d \(\backslash\)n"}, dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}}[i], dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}}[i]);}
+\DoxyCodeLine{690 }
+\DoxyCodeLine{691     \}}
+\DoxyCodeLine{692     printf(\textcolor{stringliteral}{"Total Occurences : \%d + EOF\(\backslash\)n"}, dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}}-\/1);}
+\DoxyCodeLine{693 }
+\DoxyCodeLine{694     \mbox{\hyperlink{huf_8c_a9ecb70d1cc63ccf0deffee2530c2c8f1}{HuffmanCodes}}(dist-\/>\mbox{\hyperlink{struct_dist_a429c1c17f518c8e579bfe30448900742}{tab}},dist-\/>\mbox{\hyperlink{struct_dist_aa795e87423abc54fcb38445c8774abc7}{freq}},dist-\/>\mbox{\hyperlink{struct_dist_a439227feff9d7f55384e8780cfc2eb82}{size}}, finput, foutput);}
+\DoxyCodeLine{695     \mbox{\hyperlink{huf_8c_a4b95e4f9f3462e28caf0be063d7a3749}{freeDist}}(dist);}
+\DoxyCodeLine{696     fclose(finput);}
+\DoxyCodeLine{697     fclose(foutput);}
+\DoxyCodeLine{698 }
+\DoxyCodeLine{699     \textcolor{keywordflow}{return} EXIT\_SUCCESS;}
+\DoxyCodeLine{700 \}}
+
+\end{DoxyCode}
+
+
+References free\+Dist(), Dist\+::freq, Huffman\+Codes(), load\+File(), Dist\+::size, and Dist\+::tab.
+
+\mbox{\Hypertarget{huf_8c_a3af53c910441fff58d730d141863aaf8}\label{huf_8c_a3af53c910441fff58d730d141863aaf8}} 
+\index{huf.c@{huf.c}!nouveauNoeud@{nouveauNoeud}}
+\index{nouveauNoeud@{nouveauNoeud}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{nouveauNoeud()}{nouveauNoeud()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_noeud}{Noeud}}$\ast$ nouveau\+Noeud (\begin{DoxyParamCaption}\item[{char}]{data,  }\item[{unsigned}]{freq }\end{DoxyParamCaption})}
+
+
+
+Definition at line 228 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{229 \{}
+\DoxyCodeLine{230     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}* tmp = (\textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{struct_noeud}{Noeud}}));}
+\DoxyCodeLine{231     \textcolor{keywordflow}{if}(!tmp)}
+\DoxyCodeLine{232     \{}
+\DoxyCodeLine{233         \mbox{\hyperlink{huf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(tmp);}
+\DoxyCodeLine{234     \}}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236     tmp-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}} = tmp-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}} = NULL;}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238     tmp-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}} = \mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}};}
+\DoxyCodeLine{239     tmp-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}} = \mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}};}
+\DoxyCodeLine{240     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{241 \}}
+
+\end{DoxyCode}
+
+
+References Noeud\+::data, Noeud\+::fd, Noeud\+::fg, Noeud\+::freq, and handle\+Alloc().
+
+
+
+Referenced by Construit\+Tas(), and Huffman\+Codes().
+
+\mbox{\Hypertarget{huf_8c_a9d771465017408dcb1a3cca1ebdb1e8e}\label{huf_8c_a9d771465017408dcb1a3cca1ebdb1e8e}} 
+\index{huf.c@{huf.c}!nouveauTas@{nouveauTas}}
+\index{nouveauTas@{nouveauTas}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{nouveauTas()}{nouveauTas()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$ nouveau\+Tas (\begin{DoxyParamCaption}\item[{unsigned}]{capacity }\end{DoxyParamCaption})}
+
+
+
+Fonction de création et d\textquotesingle{}allocation d\textquotesingle{}un nouveau tas avec une capacité donnée. 
+
+\begin{DoxyReturn}{Returns}
+un pointeur sur le nouveau tas 
+\end{DoxyReturn}
+
+
+Definition at line 253 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{254 \{}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_tas}{Tas}}* tas}
+\DoxyCodeLine{257         = (\textcolor{keyword}{struct }\mbox{\hyperlink{struct_tas}{Tas}}*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{struct_tas}{Tas}}));}
+\DoxyCodeLine{258     \textcolor{keywordflow}{if}(!tas)}
+\DoxyCodeLine{259     \{}
+\DoxyCodeLine{260         \mbox{\hyperlink{huf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(tas);}
+\DoxyCodeLine{261     \}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{comment}{// taille courante est de 0}}
+\DoxyCodeLine{264     tas-\/>\mbox{\hyperlink{struct_tas_ae5b063c5388157c3c04a0937d52fbeed}{taille}} = 0;}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266     tas-\/>\mbox{\hyperlink{struct_tas_a21e93dea02fd068ae122115cb7011502}{capacity}} = \mbox{\hyperlink{struct_tas_a21e93dea02fd068ae122115cb7011502}{capacity}}; \textcolor{comment}{//taille maximal du tas}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268     tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}}
+\DoxyCodeLine{269         = (\textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}**)malloc(tas-\/>}
+\DoxyCodeLine{270         capacity * \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{struct_noeud}{Noeud}}*));}
+\DoxyCodeLine{271     \textcolor{keywordflow}{if}(!tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}})}
+\DoxyCodeLine{272     \{}
+\DoxyCodeLine{273         \mbox{\hyperlink{huf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}});}
+\DoxyCodeLine{274     \}}
+\DoxyCodeLine{275     \textcolor{keywordflow}{return} tas;}
+\DoxyCodeLine{276 \}}
+
+\end{DoxyCode}
+
+
+References Tas\+::capacity, handle\+Alloc(), Tas\+::tab, and Tas\+::taille.
+
+
+
+Referenced by Construit\+Tas().
+
+\mbox{\Hypertarget{huf_8c_a6b82e942fe6d8221ae6758c3c4afe944}\label{huf_8c_a6b82e942fe6d8221ae6758c3c4afe944}} 
+\index{huf.c@{huf.c}!Tasser@{Tasser}}
+\index{Tasser@{Tasser}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{Tasser()}{Tasser()}}
+{\footnotesize\ttfamily void Tasser (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_tas}{Tas}} $\ast$}]{tas,  }\item[{int}]{ind }\end{DoxyParamCaption})}
+
+
+
+Fonction qui va réarranger le tas afin qu\textquotesingle{}il respecte à nouveau ses propriétés. 
+
+
+
+Definition at line 301 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{302 \{}
+\DoxyCodeLine{303     \textcolor{keywordtype}{int} gauche = 2 * ind + 1;  \textcolor{comment}{// Propriétés du tas}}
+\DoxyCodeLine{304     \textcolor{keywordtype}{int} droit = 2 * ind + 2;}
+\DoxyCodeLine{305     \textcolor{keywordtype}{int} plusPetit = ind;}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \textcolor{keywordflow}{if} (gauche < tas-\/>taille}
+\DoxyCodeLine{308         \&\& tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[gauche]-\/> freq < tas-\/>tab[plusPetit]-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}})}
+\DoxyCodeLine{309     \{}
+\DoxyCodeLine{310         plusPetit = gauche;}
+\DoxyCodeLine{311     \}}
+\DoxyCodeLine{312     \textcolor{keywordflow}{if} (droit < tas-\/>taille \&\&}
+\DoxyCodeLine{313         tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[droit]-\/> freq < tas-\/>tab[plusPetit]-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}})}
+\DoxyCodeLine{314     \{}
+\DoxyCodeLine{315         plusPetit = droit;}
+\DoxyCodeLine{316     \}}
+\DoxyCodeLine{317     \textcolor{keywordflow}{if} (plusPetit != ind)}
+\DoxyCodeLine{318     \{}
+\DoxyCodeLine{319         \mbox{\hyperlink{huf_8c_a4b451c1feaea27dd3ed9d1a72922a909}{echangeNoeud}}(\&tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[plusPetit], \&tas-\/>\mbox{\hyperlink{struct_tas_a584dbbbec9e6da8b8ab891a8433a376d}{tab}}[ind]); \textcolor{comment}{// on échange les noeuds pour mettre le plus petit}}
+\DoxyCodeLine{320         \mbox{\hyperlink{huf_8c_a6b82e942fe6d8221ae6758c3c4afe944}{Tasser}}(tas, plusPetit);                             \textcolor{comment}{// à la bonne place}}
+\DoxyCodeLine{321     \}}
+\DoxyCodeLine{322 \}}
+
+\end{DoxyCode}
+
+
+References echange\+Noeud(), Noeud\+::freq, and Tas\+::tab.
+
+
+
+Referenced by creer\+Tas(), and extraire\+Min().
+
+\mbox{\Hypertarget{huf_8c_ad2261504379e561a43e4ddd5d966b2a8}\label{huf_8c_ad2261504379e561a43e4ddd5d966b2a8}} 
+\index{huf.c@{huf.c}!trouveCarac@{trouveCarac}}
+\index{trouveCarac@{trouveCarac}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{trouveCarac()}{trouveCarac()}}
+{\footnotesize\ttfamily void trouve\+Carac (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root,  }\item[{unsigned char}]{tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{top,  }\item[{char}]{c,  }\item[{unsigned char}]{tab2\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Recherche un caractère à travers des noeuds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & \+: Pointeur sur un noeud \\
+\hline
+{\em tab} & \+: Tableau de charactères \\
+\hline
+{\em top} & \+: Taille de tab \\
+\hline
+{\em c} & \+: Caractère recherché \\
+\hline
+{\em tab2} & \+: L\textquotesingle{}adresse du code correspondant au caractère recherché \\
+\hline
+{\em s} & \+: Pointeur sur la longueur du code associé au caractère recherché \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 462 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{463 \{}
+\DoxyCodeLine{464     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \{}
+\DoxyCodeLine{465         tab[top] = \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{466         \mbox{\hyperlink{huf_8c_ad2261504379e561a43e4ddd5d966b2a8}{trouveCarac}}(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}, tab, top + 1, c, tab2, s);}
+\DoxyCodeLine{467     \}}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}) \{}
+\DoxyCodeLine{470         tab[top] = \textcolor{charliteral}{'1'};}
+\DoxyCodeLine{471        \mbox{\hyperlink{huf_8c_ad2261504379e561a43e4ddd5d966b2a8}{trouveCarac}}(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}, tab, top + 1, c, tab2, s);}
+\DoxyCodeLine{472     \}}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474 }
+\DoxyCodeLine{475     \textcolor{keywordflow}{if} (!(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \&\& !(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}})) \{ \textcolor{comment}{//Si c'est une feuille}}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477         \textcolor{keywordflow}{if}(c == root-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}}) \textcolor{comment}{//et que la feuille est le caractère qu'on veut placer}}
+\DoxyCodeLine{478         \{}
+\DoxyCodeLine{479             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<top;i++)}
+\DoxyCodeLine{480             \{}
+\DoxyCodeLine{481                 tab2[i]=tab[i]; \textcolor{comment}{//on modifie tab2 qui est la sortie du code}}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483             \}}
+\DoxyCodeLine{484             *s=top; \textcolor{comment}{//taille du tab2}}
+\DoxyCodeLine{485         \}}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487     \}}
+\DoxyCodeLine{488 \}}
+
+\end{DoxyCode}
+
+
+References Noeud\+::data, Noeud\+::fd, Noeud\+::fg, and Tas\+::tab.
+
+
+
+Referenced by compresseur\+Huffman().
+
+\mbox{\Hypertarget{huf_8c_a3440fab03e8eec352f1079c5654206ca}\label{huf_8c_a3440fab03e8eec352f1079c5654206ca}} 
+\index{huf.c@{huf.c}!write\_bit@{write\_bit}}
+\index{write\_bit@{write\_bit}!huf.c@{huf.c}}
+\doxysubsubsection{\texorpdfstring{write\_bit()}{write\_bit()}}
+{\footnotesize\ttfamily int write\+\_\+bit (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{byte,  }\item[{int $\ast$}]{pos,  }\item[{F\+I\+LE $\ast$}]{fp,  }\item[{unsigned char}]{e }\end{DoxyParamCaption})}
+
+
+
+Definition at line 490 of file huf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{491 \{}
+\DoxyCodeLine{492     \textcolor{keywordtype}{int} written;}
+\DoxyCodeLine{493     \textcolor{keywordflow}{if}(*pos==8) \textcolor{comment}{//si les 8bits sont remplis}}
+\DoxyCodeLine{494     \{}
+\DoxyCodeLine{495         written = fputc(*\textcolor{keywordtype}{byte}, fp); \textcolor{comment}{//on écrit l'octet dans le fichier}}
+\DoxyCodeLine{496         \textcolor{keywordflow}{if}(written==EOF)}
+\DoxyCodeLine{497             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{498         *\textcolor{keywordtype}{byte}=0; \textcolor{comment}{//on initialise ensuite la pos et le buffer}}
+\DoxyCodeLine{499         *pos=0;}
+\DoxyCodeLine{500       \}}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{502     \textcolor{keywordflow}{if}( e ==\textcolor{charliteral}{'1'}) \textcolor{comment}{// si c'est un 1}}
+\DoxyCodeLine{503     \{}
+\DoxyCodeLine{504         *\textcolor{keywordtype}{byte} |= 0x1 <<(7-\/(*pos)); \textcolor{comment}{//on réalise un ou binaire qui va assigner le décalage de 7 -\/ position bits}}
+\DoxyCodeLine{505                                     \textcolor{comment}{// pour le buffer}}
+\DoxyCodeLine{506     \}}
+\DoxyCodeLine{507     \textcolor{keywordflow}{if}(e==\textcolor{charliteral}{'0'}); \textcolor{comment}{//si c'est 0 on ne change rien, on part de 0000 0000 pour travailler donc les 0 ne changent pas}}
+\DoxyCodeLine{508     (*pos)++;}
+\DoxyCodeLine{509     \textcolor{keywordflow}{if}(*pos >8) \textcolor{comment}{// cas où on dépasserait, cela n'arrive jamais en théorie}}
+\DoxyCodeLine{510     \{}
+\DoxyCodeLine{511         printf(\textcolor{stringliteral}{"\(\backslash\)n DEPASSEMENT \(\backslash\)n"});}
+\DoxyCodeLine{512         *pos=0;}
+\DoxyCodeLine{513     \}}
+\DoxyCodeLine{514 \}}
+
+\end{DoxyCode}
+
+
+Referenced by codage\+Arbre(), and compresseur\+Huffman().
+

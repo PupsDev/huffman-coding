@@ -1,0 +1,542 @@
+\hypertarget{dehuf_8c}{}\doxysection{C\+:/\+Users/\+Pups/\+Documents/\+P\+R\+O\+J\+E\+T\+\_\+\+C/\+H\+U\+F\+F\+\_\+\+F\+I\+N\+A\+L/git/dehuf.c File Reference}
+\label{dehuf_8c}\index{C:/Users/Pups/Documents/PROJET\_C/HUFF\_FINAL/git/dehuf.c@{C:/Users/Pups/Documents/PROJET\_C/HUFF\_FINAL/git/dehuf.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_noeud}{Noeud}}
+\begin{DoxyCompactList}\small\item\em Objet qui dÈcrit un noeud du \mbox{\hyperlink{struct_tas}{Tas}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_tas}{Tas}}
+\begin{DoxyCompactList}\small\item\em Objet qui dÈcrit le \mbox{\hyperlink{struct_tas}{Tas}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{dehuf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}{E\+R\+R\+O\+R\+\_\+10}}~\char`\"{}Impossible d\textquotesingle{}allouer la mÈmoire\textbackslash{}n\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{dehuf_8c_a2894576418d17462e7fbeef9a42b31c8}{handle\+Alloc}} (void $\ast$pt)
+\begin{DoxyCompactList}\small\item\em Fonction pour g√©rer les √©checs d\textquotesingle{}allocations d\textquotesingle{}un pointeur. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ \mbox{\hyperlink{dehuf_8c_af42e65761ddad9d3a5e5953349ace83e}{nouveau\+Noeud}} (char data, unsigned freq)
+\begin{DoxyCompactList}\small\item\em Fonction de cr√©ation d\textquotesingle{}un nouveau noeud avec le caract√®re donn√© et sa fr√©quence. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{dehuf_8c_ad8eb1c14a09e120da0a1ecf8b87498a6}{read\+\_\+byte}} (F\+I\+LE $\ast$fp, char buffer\mbox{[}$\,$\mbox{]})
+\item 
+char \mbox{\hyperlink{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}{read}} (F\+I\+LE $\ast$fp, int $\ast$pos, char buffer\mbox{[}$\,$\mbox{]})
+\item 
+char \mbox{\hyperlink{dehuf_8c_a43ad892419f6a60585d608dc3c572f0c}{bit\+To\+Char}} (char buffer\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{dehuf_8c_ad06131f04a4510bb39799490cd2484fe}{decode\+\_\+tree}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root, int $\ast$pos, char buffer\mbox{[}$\,$\mbox{]}, F\+I\+LE $\ast$fp)
+\item 
+void \mbox{\hyperlink{dehuf_8c_a978d3ddde8e5bd73b022874a7d3f82fd}{decode\+\_\+file}} (F\+I\+LE $\ast$fp, int $\ast$pos, char buffer\mbox{[}$\,$\mbox{]}, struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root)
+\item 
+void \mbox{\hyperlink{dehuf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}{affiche\+Tab}} (int tab\mbox{[}$\,$\mbox{]}, int n)
+\item 
+void \mbox{\hyperlink{dehuf_8c_a14af3f113125987f2e363d174ec66964}{affiche\+Code}} (struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$root, int tab\mbox{[}$\,$\mbox{]}, int top)
+\begin{DoxyCompactList}\small\item\em Affiche le code de chaque caract√®re. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{dehuf_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dehuf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}\label{dehuf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}} 
+\index{dehuf.c@{dehuf.c}!ERROR\_10@{ERROR\_10}}
+\index{ERROR\_10@{ERROR\_10}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{ERROR\_10}{ERROR\_10}}
+{\footnotesize\ttfamily \#define E\+R\+R\+O\+R\+\_\+10~\char`\"{}Impossible d\textquotesingle{}allouer la mÈmoire\textbackslash{}n\char`\"{}}
+
+
+
+Definition at line 3 of file dehuf.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{dehuf_8c_a14af3f113125987f2e363d174ec66964}\label{dehuf_8c_a14af3f113125987f2e363d174ec66964}} 
+\index{dehuf.c@{dehuf.c}!afficheCode@{afficheCode}}
+\index{afficheCode@{afficheCode}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{afficheCode()}{afficheCode()}}
+{\footnotesize\ttfamily void affiche\+Code (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root,  }\item[{int}]{tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{top }\end{DoxyParamCaption})}
+
+
+
+Affiche le code de chaque caract√®re. 
+
+
+
+Definition at line 248 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{249 \{}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \{}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253         tab[top] = 0;}
+\DoxyCodeLine{254         \mbox{\hyperlink{dehuf_8c_a14af3f113125987f2e363d174ec66964}{afficheCode}}(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}, tab, top + 1);}
+\DoxyCodeLine{255     \}}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257     \textcolor{keywordflow}{if} (root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}) \{}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259         tab[top] = 1;}
+\DoxyCodeLine{260         \mbox{\hyperlink{dehuf_8c_a14af3f113125987f2e363d174ec66964}{afficheCode}}(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}, tab, top + 1);}
+\DoxyCodeLine{261     \}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264     \textcolor{keywordflow}{if} (!(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}) \&\& !(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}})) \{}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266         printf(\textcolor{stringliteral}{"codeChar(\%c)="}, root-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}});}
+\DoxyCodeLine{267         \mbox{\hyperlink{dehuf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}{afficheTab}}(tab, top);}
+\DoxyCodeLine{268     \}}
+\DoxyCodeLine{269 \}}
+
+\end{DoxyCode}
+
+
+References affiche\+Tab(), Noeud\+::data, Noeud\+::fd, and Noeud\+::fg.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{dehuf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}\label{dehuf_8c_a3c7e84c5922e78e29b7d73b794a29f5a}} 
+\index{dehuf.c@{dehuf.c}!afficheTab@{afficheTab}}
+\index{afficheTab@{afficheTab}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{afficheTab()}{afficheTab()}}
+{\footnotesize\ttfamily void affiche\+Tab (\begin{DoxyParamCaption}\item[{int}]{tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Definition at line 240 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{241 \{}
+\DoxyCodeLine{242     \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{243     \textcolor{keywordflow}{for} (i = 0; i < n; ++i)}
+\DoxyCodeLine{244         printf(\textcolor{stringliteral}{"\%d"}, tab[i]);}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246     printf(\textcolor{stringliteral}{"\(\backslash\)n"});}
+\DoxyCodeLine{247 \}}
+
+\end{DoxyCode}
+
+
+Referenced by affiche\+Code().
+
+\mbox{\Hypertarget{dehuf_8c_a43ad892419f6a60585d608dc3c572f0c}\label{dehuf_8c_a43ad892419f6a60585d608dc3c572f0c}} 
+\index{dehuf.c@{dehuf.c}!bitToChar@{bitToChar}}
+\index{bitToChar@{bitToChar}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{bitToChar()}{bitToChar()}}
+{\footnotesize\ttfamily char bit\+To\+Char (\begin{DoxyParamCaption}\item[{char}]{buffer\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 87 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{88 \{}
+\DoxyCodeLine{89     \textcolor{keywordtype}{char} c=0;}
+\DoxyCodeLine{90     \textcolor{keywordtype}{int} bit = 0x80;}
+\DoxyCodeLine{91     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0 ; i<8 ; i++)}
+\DoxyCodeLine{92     \{}
+\DoxyCodeLine{93         \textcolor{keywordflow}{if}( buffer[i] ==\textcolor{charliteral}{'1'})}
+\DoxyCodeLine{94         \{}
+\DoxyCodeLine{95             c |= bit >>i;}
+\DoxyCodeLine{96         \}}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98     \textcolor{keywordflow}{return} c;}
+\DoxyCodeLine{99 \}}
+
+\end{DoxyCode}
+
+
+Referenced by decode\+\_\+file(), and decode\+\_\+tree().
+
+\mbox{\Hypertarget{dehuf_8c_a978d3ddde8e5bd73b022874a7d3f82fd}\label{dehuf_8c_a978d3ddde8e5bd73b022874a7d3f82fd}} 
+\index{dehuf.c@{dehuf.c}!decode\_file@{decode\_file}}
+\index{decode\_file@{decode\_file}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{decode\_file()}{decode\_file()}}
+{\footnotesize\ttfamily void decode\+\_\+file (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{int $\ast$}]{pos,  }\item[{char}]{buffer\mbox{[}$\,$\mbox{]},  }\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root }\end{DoxyParamCaption})}
+
+
+
+Definition at line 151 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{152 \{}
+\DoxyCodeLine{153     \textcolor{keywordtype}{char} carac=\textcolor{charliteral}{'0'};}
+\DoxyCodeLine{154     \textcolor{keywordtype}{int} count=0;}
+\DoxyCodeLine{155     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}} * n = root;}
+\DoxyCodeLine{156     \textcolor{keywordtype}{char} bit;}
+\DoxyCodeLine{157     }
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{keywordflow}{while}(carac != -\/96 )}
+\DoxyCodeLine{161     \{}
+\DoxyCodeLine{162         \textcolor{keywordflow}{if}(n-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}==NULL \&\& n-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}} ==NULL)}
+\DoxyCodeLine{163         \{}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165                 carac = n-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}};}
+\DoxyCodeLine{166                 }
+\DoxyCodeLine{167                 \textcolor{keywordflow}{if}(carac ==-\/96 )}
+\DoxyCodeLine{168                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{169                printf(\textcolor{stringliteral}{"\%c"},carac);}
+\DoxyCodeLine{170                 \textcolor{comment}{//fputc(carac, ftest);}}
+\DoxyCodeLine{171                 }
+\DoxyCodeLine{172                 n = root;}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174         \}}
+\DoxyCodeLine{175         \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{176             bit =\mbox{\hyperlink{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}{read}}(fp,pos,buffer);}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178             \textcolor{keywordflow}{if}(bit==\textcolor{charliteral}{'0'})}
+\DoxyCodeLine{179             \{}
+\DoxyCodeLine{180                 n=n-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182             \}}
+\DoxyCodeLine{183             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(bit==\textcolor{charliteral}{'1'})}
+\DoxyCodeLine{184             \{}
+\DoxyCodeLine{185                 n=n-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}};}
+\DoxyCodeLine{186             \}}
+\DoxyCodeLine{187         \}}
+\DoxyCodeLine{188     \}}
+\DoxyCodeLine{189     }
+\DoxyCodeLine{190     bit =\mbox{\hyperlink{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}{read}}(fp,pos,buffer);}
+\DoxyCodeLine{191      carac=0;}
+\DoxyCodeLine{192      n=root;}
+\DoxyCodeLine{193      \textcolor{comment}{/*}}
+\DoxyCodeLine{194 \textcolor{comment}{     }}
+\DoxyCodeLine{195 \textcolor{comment}{     printf("\(\backslash\)npos \%d",*pos);}}
+\DoxyCodeLine{196 \textcolor{comment}{     printf("\(\backslash\)nbuffer : \%c\(\backslash\)n",bitToChar(buffer));}}
+\DoxyCodeLine{197 \textcolor{comment}{     printf(" bit = \%c\(\backslash\)n",bit);}}
+\DoxyCodeLine{198 \textcolor{comment}{     */}}
+\DoxyCodeLine{199     }
+\DoxyCodeLine{200      }
+\DoxyCodeLine{201      }
+\DoxyCodeLine{202     \textcolor{keywordflow}{if}( bit!=\textcolor{charliteral}{'0'} || ( \mbox{\hyperlink{dehuf_8c_a43ad892419f6a60585d608dc3c572f0c}{bitToChar}}(buffer)!=\textcolor{charliteral}{'0'} \&\& \mbox{\hyperlink{dehuf_8c_a43ad892419f6a60585d608dc3c572f0c}{bitToChar}}(buffer)>0)  )}
+\DoxyCodeLine{203     \{}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205         \textcolor{keywordflow}{while}(carac != -\/96)}
+\DoxyCodeLine{206     \{}
+\DoxyCodeLine{207         }
+\DoxyCodeLine{208         \textcolor{keywordflow}{if}(n-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}==NULL \&\& n-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}} ==NULL)}
+\DoxyCodeLine{209         \{}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211                 carac = n-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}};}
+\DoxyCodeLine{212                 \textcolor{keywordflow}{if}(carac ==-\/96)}
+\DoxyCodeLine{213                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{214                 printf(\textcolor{stringliteral}{"\%c"},carac);}
+\DoxyCodeLine{215                 \textcolor{comment}{//fputc(carac, ftest);}}
+\DoxyCodeLine{216                 n = root;}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218         \}}
+\DoxyCodeLine{219         \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{220             bit =\mbox{\hyperlink{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}{read}}(fp,pos,buffer);}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222             \textcolor{keywordflow}{if}(bit==\textcolor{charliteral}{'0'})}
+\DoxyCodeLine{223             \{}
+\DoxyCodeLine{224                 n=n-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}};}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226             \}}
+\DoxyCodeLine{227             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(bit==\textcolor{charliteral}{'1'})}
+\DoxyCodeLine{228             \{}
+\DoxyCodeLine{229                 n=n-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}};}
+\DoxyCodeLine{230             \}}
+\DoxyCodeLine{231         \}}
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233     }
+\DoxyCodeLine{234     \}}
+\DoxyCodeLine{235     }
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238 \}}
+
+\end{DoxyCode}
+
+
+References bit\+To\+Char(), Noeud\+::data, Noeud\+::fd, Noeud\+::fg, and read().
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{dehuf_8c_ad06131f04a4510bb39799490cd2484fe}\label{dehuf_8c_ad06131f04a4510bb39799490cd2484fe}} 
+\index{dehuf.c@{dehuf.c}!decode\_tree@{decode\_tree}}
+\index{decode\_tree@{decode\_tree}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{decode\_tree()}{decode\_tree()}}
+{\footnotesize\ttfamily void decode\+\_\+tree (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$}]{root,  }\item[{int $\ast$}]{pos,  }\item[{char}]{buffer\mbox{[}$\,$\mbox{]},  }\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+
+
+Definition at line 100 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{101 \{}
+\DoxyCodeLine{102     \textcolor{keywordtype}{char} bit;}
+\DoxyCodeLine{103     \textcolor{keywordtype}{char} carac;}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keywordtype}{char} bitBuffer[8];}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     bit =\mbox{\hyperlink{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}{read}}(fp,pos,buffer);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         \textcolor{keywordflow}{if}(bit ==\textcolor{charliteral}{'1'})}
+\DoxyCodeLine{111         \{}
+\DoxyCodeLine{112             root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}} = NULL;}
+\DoxyCodeLine{113             root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}} = NULL;}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<8;i++)}
+\DoxyCodeLine{116             \{}
+\DoxyCodeLine{117                 bit=\mbox{\hyperlink{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}{read}}(fp,pos,buffer);}
+\DoxyCodeLine{118                 bitBuffer[i]=bit;}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120             \}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122             carac = \mbox{\hyperlink{dehuf_8c_a43ad892419f6a60585d608dc3c572f0c}{bitToChar}}(bitBuffer);}
+\DoxyCodeLine{123             root-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}} = carac;}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125            \textcolor{comment}{// printf("carac : \%d\(\backslash\)n", carac);}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127         \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{130         \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}} *gauche =\mbox{\hyperlink{dehuf_8c_af42e65761ddad9d3a5e5953349ace83e}{nouveauNoeud}}(\textcolor{charliteral}{'X'},0);;}
+\DoxyCodeLine{131         \textcolor{keywordflow}{if}(!gauche)}
+\DoxyCodeLine{132         \{}
+\DoxyCodeLine{133             \mbox{\hyperlink{dehuf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(gauche);}
+\DoxyCodeLine{134         \}}
+\DoxyCodeLine{135         root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}}=gauche;}
+\DoxyCodeLine{136         \mbox{\hyperlink{dehuf_8c_ad06131f04a4510bb39799490cd2484fe}{decode\_tree}}(root-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}},pos,buffer,fp);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138         \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}} *droit =\mbox{\hyperlink{dehuf_8c_af42e65761ddad9d3a5e5953349ace83e}{nouveauNoeud}}(\textcolor{charliteral}{'X'},0);}
+\DoxyCodeLine{139         \textcolor{keywordflow}{if}(!droit)}
+\DoxyCodeLine{140         \{}
+\DoxyCodeLine{141             \mbox{\hyperlink{dehuf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(droit);}
+\DoxyCodeLine{142         \}}
+\DoxyCodeLine{143         root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}}=droit;}
+\DoxyCodeLine{144         \mbox{\hyperlink{dehuf_8c_ad06131f04a4510bb39799490cd2484fe}{decode\_tree}}(root-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}},pos,buffer,fp);}
+\DoxyCodeLine{145     \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \}}
+
+\end{DoxyCode}
+
+
+References bit\+To\+Char(), Noeud\+::data, Noeud\+::fd, Noeud\+::fg, handle\+Alloc(), nouveau\+Noeud(), and read().
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{dehuf_8c_a2894576418d17462e7fbeef9a42b31c8}\label{dehuf_8c_a2894576418d17462e7fbeef9a42b31c8}} 
+\index{dehuf.c@{dehuf.c}!handleAlloc@{handleAlloc}}
+\index{handleAlloc@{handleAlloc}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{handleAlloc()}{handleAlloc()}}
+{\footnotesize\ttfamily void handle\+Alloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{pt }\end{DoxyParamCaption})}
+
+
+
+Fonction pour g√©rer les √©checs d\textquotesingle{}allocations d\textquotesingle{}un pointeur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & adresse de la variable utilis√©e pour l\textquotesingle{}allocation \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39     fprintf(stderr,\mbox{\hyperlink{dehuf_8c_a52b3f9fdaefc7d078cb828ec63aa7ae7}{ERROR\_10}});}
+\DoxyCodeLine{40     free(pt);}
+\DoxyCodeLine{41 \}}
+
+\end{DoxyCode}
+
+
+References E\+R\+R\+O\+R\+\_\+10.
+
+
+
+Referenced by decode\+\_\+tree(), main(), and nouveau\+Noeud().
+
+\mbox{\Hypertarget{dehuf_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{dehuf_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{dehuf.c@{dehuf.c}!main@{main}}
+\index{main@{main}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 270 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{271 \{}
+\DoxyCodeLine{272     \textcolor{keywordtype}{char} buffer[8];}
+\DoxyCodeLine{273     \textcolor{keywordtype}{int} pos=0;}
+\DoxyCodeLine{274     }
+\DoxyCodeLine{275      \textcolor{keywordflow}{if}(argc<2)\{}
+\DoxyCodeLine{276         fprintf(stderr, \textcolor{stringliteral}{" necessite : -\/ un fichier ‡ dÈcompresser \(\backslash\)n"});}
+\DoxyCodeLine{277         exit(1);}
+\DoxyCodeLine{278     \}}
+\DoxyCodeLine{279     FILE* finput = fopen(argv[1], \textcolor{stringliteral}{"rb"});}
+\DoxyCodeLine{280     \textcolor{keywordflow}{if}(!finput)\{}
+\DoxyCodeLine{281         fprintf(stderr, \textcolor{stringliteral}{"Impossible d'ouvrir le fichier ‡ dÈcompresser : \%s\(\backslash\)n"}, argv[1]);}
+\DoxyCodeLine{282         exit(1);}
+\DoxyCodeLine{283     \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}} *root = \mbox{\hyperlink{dehuf_8c_af42e65761ddad9d3a5e5953349ace83e}{nouveauNoeud}}(\textcolor{charliteral}{'X'},0);}
+\DoxyCodeLine{287     \textcolor{keywordflow}{if}(!root)}
+\DoxyCodeLine{288         \{}
+\DoxyCodeLine{289             \mbox{\hyperlink{dehuf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(root);}
+\DoxyCodeLine{290         \}}
+\DoxyCodeLine{291     \mbox{\hyperlink{dehuf_8c_ad8eb1c14a09e120da0a1ecf8b87498a6}{read\_byte}}(finput, buffer);}
+\DoxyCodeLine{292     \mbox{\hyperlink{dehuf_8c_ad06131f04a4510bb39799490cd2484fe}{decode\_tree}}(root,\&pos,buffer,finput);}
+\DoxyCodeLine{293     \textcolor{keywordtype}{int} tab[256];}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295     \mbox{\hyperlink{dehuf_8c_a14af3f113125987f2e363d174ec66964}{afficheCode}}(root, tab,0);}
+\DoxyCodeLine{296     }
+\DoxyCodeLine{297         }
+\DoxyCodeLine{298     \mbox{\hyperlink{dehuf_8c_a978d3ddde8e5bd73b022874a7d3f82fd}{decode\_file}}(finput, \&pos, buffer, root);}
+\DoxyCodeLine{299     free(root);}
+\DoxyCodeLine{300     }
+\DoxyCodeLine{301     printf(\textcolor{stringliteral}{"\(\backslash\)n Lecture de \%ld octets.\(\backslash\)n"}, ftell(finput));}
+\DoxyCodeLine{302     printf(\textcolor{stringliteral}{"\(\backslash\)n"});}
+\DoxyCodeLine{303     fclose(finput);}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{306 \}}
+
+\end{DoxyCode}
+
+
+References affiche\+Code(), decode\+\_\+file(), decode\+\_\+tree(), handle\+Alloc(), nouveau\+Noeud(), and read\+\_\+byte().
+
+\mbox{\Hypertarget{dehuf_8c_af42e65761ddad9d3a5e5953349ace83e}\label{dehuf_8c_af42e65761ddad9d3a5e5953349ace83e}} 
+\index{dehuf.c@{dehuf.c}!nouveauNoeud@{nouveauNoeud}}
+\index{nouveauNoeud@{nouveauNoeud}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{nouveauNoeud()}{nouveauNoeud()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_noeud}{Noeud}} $\ast$ nouveau\+Noeud (\begin{DoxyParamCaption}\item[{char}]{data,  }\item[{unsigned}]{freq }\end{DoxyParamCaption})}
+
+
+
+Fonction de cr√©ation d\textquotesingle{}un nouveau noeud avec le caract√®re donn√© et sa fr√©quence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tmp} & \+: Le noeud temporaire qu\textquotesingle{}on va renvoyer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tmp Un pointeur vers une structure \mbox{\hyperlink{struct_noeud}{Noeud}} 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}* tmp = (\textcolor{keyword}{struct }\mbox{\hyperlink{struct_noeud}{Noeud}}*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{struct_noeud}{Noeud}}));}
+\DoxyCodeLine{45     \textcolor{keywordflow}{if}(!tmp)}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47         \mbox{\hyperlink{dehuf_8c_a2894576418d17462e7fbeef9a42b31c8}{handleAlloc}}(tmp);}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     tmp-\/>\mbox{\hyperlink{struct_noeud_aded633a04f8af604b1a9155f687c8113}{fg}} = tmp-\/>\mbox{\hyperlink{struct_noeud_af0143b7c7b90761aaf17b185c1476f49}{fd}} = NULL;}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     tmp-\/>\mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}} = \mbox{\hyperlink{struct_noeud_ada8140e33c3fd1e2eceba4c71f0e9ded}{freq}};}
+\DoxyCodeLine{53     tmp-\/>\mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}} = \mbox{\hyperlink{struct_noeud_a0f11fc08c1ec2c8146ddd0d5b8fe8355}{data}};}
+\DoxyCodeLine{54     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{55 \}}
+
+\end{DoxyCode}
+
+
+References Noeud\+::data, Noeud\+::fd, Noeud\+::fg, Noeud\+::freq, and handle\+Alloc().
+
+
+
+Referenced by decode\+\_\+tree(), and main().
+
+\mbox{\Hypertarget{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}\label{dehuf_8c_ac2c22b0e56ee8802acf95d9381356d85}} 
+\index{dehuf.c@{dehuf.c}!read@{read}}
+\index{read@{read}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily char read (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{int $\ast$}]{pos,  }\item[{char}]{buffer\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 70 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{71 \{}
+\DoxyCodeLine{72     \textcolor{keywordtype}{char} bit;}
+\DoxyCodeLine{73    \textcolor{keywordflow}{if}((*pos)==8)}
+\DoxyCodeLine{74    \{}
+\DoxyCodeLine{75        \textcolor{comment}{//printf("depasse");}}
+\DoxyCodeLine{76        (*pos)=0;}
+\DoxyCodeLine{77        \mbox{\hyperlink{dehuf_8c_ad8eb1c14a09e120da0a1ecf8b87498a6}{read\_byte}}(fp, buffer);}
+\DoxyCodeLine{78    \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80    bit = buffer[*pos];}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83    (*pos)++;}
+\DoxyCodeLine{84    \textcolor{keywordflow}{return} bit;}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \}}
+
+\end{DoxyCode}
+
+
+References read\+\_\+byte().
+
+
+
+Referenced by decode\+\_\+file(), and decode\+\_\+tree().
+
+\mbox{\Hypertarget{dehuf_8c_ad8eb1c14a09e120da0a1ecf8b87498a6}\label{dehuf_8c_ad8eb1c14a09e120da0a1ecf8b87498a6}} 
+\index{dehuf.c@{dehuf.c}!read\_byte@{read\_byte}}
+\index{read\_byte@{read\_byte}!dehuf.c@{dehuf.c}}
+\doxysubsubsection{\texorpdfstring{read\_byte()}{read\_byte()}}
+{\footnotesize\ttfamily int read\+\_\+byte (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{char}]{buffer\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 56 of file dehuf.\+c.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58     \textcolor{keywordtype}{int} byte;}
+\DoxyCodeLine{59     \textcolor{keywordtype}{int} bit =0x80;}
+\DoxyCodeLine{60     \textcolor{keywordtype}{byte} = fgetc(fp);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<8;i++)}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64         buffer[i]= \textcolor{keywordtype}{byte} \& bit ? \textcolor{charliteral}{'1'} : \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{65         bit=bit>>1;}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{keywordflow}{return} byte;}
+\DoxyCodeLine{69 \}}
+
+\end{DoxyCode}
+
+
+Referenced by main(), and read().
+
