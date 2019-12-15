@@ -7,7 +7,7 @@ Un compresseur et decompresseur Huffman en C.
 ### Prérequis
 
 
-Compiler les fichier huf.c et dehuf.c en utilisant la commande make.
+Compiler les fichier huf.c et dehuf.c en utilisant la commande "make huf" et "make dehuf".
 L'archiveur python permet de parcourir les fichiers dans le dossier entrée par l'utilisateur, de les concaténer en un seul fichier et de l'archiver.
 
 
