@@ -34,7 +34,7 @@ Le désarchiveur n'est pas au point. Il ne s'arrête pas après le EOF.
 ## Conclusion
 Nous aurions pu calculer l'entropie de Shannon pour chaque fichier afin de déterminer la limite maximal de la taille maximale du code. Dans un second temps, travailler sur des blocs de n caractères au lieu de de un par un, permettrait de compresser encore plus.
 
-## Authors
+## Auteurs
 
 * **Jean-Charles ALLA** (https://github.com/charlister)
 * **Mathieu LADEUIL** (https://github.com/PupsDev)
